@@ -11,12 +11,13 @@
       </div>
       <div class="toFav">
         <a href="#top" style="color:white;">
-          <span v-on:click="isShowFav = !isShowFav">{{isShowFav ? "<<Back " : "Favorite Pokemon"}}</span>
+          <span v-on:click="handleShowFav()">{{isShowFav ? "<<Back " : "Favorite Pokemon"}}</span>
         </a>
       </div>
   </div>
   <div class="container">
     <div name="top"></div>
+    <h3 style="color:white;text-transform:capitalize;">filter type: <span>{{this.filterValue}}</span></h3>
     <PokemonFilterByType
       @setPokemonFilter="setPokemonFilter"
     />
@@ -57,6 +58,7 @@
         showDetail: false,
         isShowFav: false,
         favoritePokemons: [],
+        filterValue:''
       }
     },
     components: {
@@ -73,8 +75,10 @@
       setPokemonFilter(type){
         if(type=='all'){
           this.pokeTypeUrl = ''
+          this.filterValue = '';
         }else{
           this.pokeTypeUrl = `https://pokeapi.co/api/v2/type/${type}`
+          this.filterValue = type;
         }
       },
       closeDetail() {
@@ -89,6 +93,11 @@
         if(index !== -1){
           this.favoritePokemons.splice(index, 1);
         }
+      },
+      handleShowFav(){
+        this.isShowFav = !this.isShowFav;
+        this.pokeTypeUrl = ''
+        this.filterValue = '';
       }
     }
   }

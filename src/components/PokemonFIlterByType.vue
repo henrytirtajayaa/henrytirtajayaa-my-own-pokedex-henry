@@ -1,6 +1,5 @@
 <template>
   <div class="header">
-     <h3 style="color:white;text-transform:capitalize;">filter type: <span>{{this.filterValue}}</span></h3>
      <div class="informations">
           <button 
                v-on:click="handleFilterValue('all')" 
